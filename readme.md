@@ -31,7 +31,7 @@ Spark peut être très verbeux, pour réduire la verbosité :<br>
 - Chercher la ligne rootLogger.level = info et remplacer *info* par *error*
 <br>
 Lancer un script, exemple : <br>
-*/opt/spark/bin/spark-submit wordcount.py text.txt*
+/opt/spark/bin/spark-submit wordcount.py text.txt
 
 
 ### **2. Spark Shell**
