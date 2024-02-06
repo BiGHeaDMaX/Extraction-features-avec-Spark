@@ -30,8 +30,8 @@ Spark peut être très verbeux, pour réduire la verbosité :<br>
 - Ouvrir log4j2.properties avec gvim par exemple (mode edition en appuyant sur "i")
 - Chercher la ligne rootLogger.level = info et remplacer *info* par *error*
 <br>
-Lancer un script, exemple : 
-[i]/opt/spark/bin/spark-submit wordcount.py text.txt[/i]
+Lancer un script, exemple : <br>
+*/opt/spark/bin/spark-submit wordcount.py text.txt*
 
 
 ### **2. Spark Shell**
