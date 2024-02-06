@@ -29,4 +29,20 @@ Spark peut être très verbeux, pour réduire la verbosité :<br>
 - Copier (commande cp) log4j2.properties.template pour créer log4j2.properties
 - Ouvrir log4j2.properties avec gvim par exemple (mode edition en appuyant sur "i")
 - Chercher la ligne rootLogger.level = info et remplacer *info* par *error*
+<br>
+Lancer un script, exemple : 
+*/opt/spark/bin/spark-submit wordcount.py text.txt*
+
+
+### **2. Spark Shell**
+Pour lancer la version python : *pyspark* ou */opt/spark/bin/pyspark*<br>
+<br>
+Pour un interpréteur un peu plus convivial : <br>
+- Utiliser ipython (si pas disponible : pip install)
+- Le mettre dans la variable PYSPARK_PYTHON
+- Lancement avec la commande : *PYSPARK_PYTHON=ipython /opt/spark/bin/pyspark* ou *PYSPARK_PYTHON=ipython pyspark*
+<br>
+Dans un Spark Shell vous n'avez pas besoin de créer un objetSparkContext puisqu'il a déjà été créé. Il est disponible via la variable sc.
+
+
 
