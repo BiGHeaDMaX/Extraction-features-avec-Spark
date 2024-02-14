@@ -50,12 +50,12 @@ On peut vérifier que c'est bien installé (et où) en tapant : which aws (sous 
 Une fois installé, il peut être nécessaire de relancer le terminal avant de pouvoir lancer une commande aws.<br>
 Pour installer la v1xx (non recommandé) : *pip install awscli*<br>
 
-**Création d'une clef :**<br>
+**\_Création d'une clef :\_**<br>
 Aller dans son compte AWS, en haut à droite cliquer sur son nom puis sur *Informations d'identification de sécurité*.<br>
 Sur cette page créer une clef d'accès. **Attention** : penser à la supprimer/désactiver quand elle ne sert plus.<br>
 Une fois la clef créée, la télécharger au format csv.<br>
 
-**Configuration d'AWS CLI :**<br>
+**\_Configuration d'AWS CLI :\_**<br>
 Taper : aws configure<br>
 Et entrer la clef précédemment crée (*Access key ID* et *Secret access key*).<br>
 *Default region name* [None], pour mettre pour la France : eu-west-3<br>
@@ -66,10 +66,10 @@ On peut aussi utiliser json comme *Default output format*, ce qui indique que vo
 Nous stockerons tous nos fichiers dans un bucket S3 (logs de Spark, notebook, images à traiter et données produites par les traitements).<br><br>
 Pour créer le bucket : aws s3 mb s3://*Nom_Du_Bucket*<br><br>
 Le nom doit être unique, pas seulement sur votre compte mais parmis tous les buckets créés par tous les utilisateurs sur S3. Ce qui est logique car ces buckets peuvent être accessibles publiquement (privés par défaut).<br><br>
-**Upload de fichiers :**<br>
+**\_Upload de fichiers :\_**<br>
 Pour uploader tout un dossier, par exemple celui contenant toutes les images, se déplacer dans le dossier et taper : aws s3 sync . s3://*Nom_Du_Bucket*/*Nom_Du_Dossier_De_Destination*<br><br>
-Si vous n'êtes pas dans le dossier à uploader, indiquez le chemin complet de ce dernier à la place du "." après *sync*.<br>
-**Autoriser l'accès public de certains fichiers :**<br>
+Si vous n'êtes pas dans le dossier à uploader, indiquez le chemin complet de ce dernier à la place du "." après *sync*.<br><br>
+**\_Autoriser l'accès public de certains fichiers :\_**<br>
 Si vous souhaitez ouvrir au public l'accès à certains fichiers, sur le site d'AWS, aller dans le bucket créé, puis dans l'onglet *Autorisation*, puis désactiver *Bloquer l'accès public*. Par défaut l'accès publique de tout le contenu du bucket est désactivé, prudence quand vous désactivez ce paramètre car cela veut dire que vous pourrez alors ouvrir l'accès à certains fichiers.<br><br>
 Toujours dans *Autorisation*, allez dans *Stratégie de compartiment* et vous pourrez y paramétrer l'accès à certains fichiers/dossiers, au format JSON. Exemple pour partager le notebook et le fichier de sortie de notre programme :<br><br>
 ```
