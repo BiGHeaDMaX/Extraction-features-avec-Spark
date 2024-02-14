@@ -198,9 +198,9 @@ Créer un accès dans foxyproxy : <br>
 - Type : SOCKS5
 - Hostname : localhost
 - Post : 5555 (ou autre si on en a choisi un autre).
-<br>
+
 Ensuite on peut accéder à Jupyterhub, se connecter avec les identifiants par défauts : <br>
-<br>
+
 - login : jovyan<br>
 - password : jupyter<br>
 
