@@ -45,14 +45,15 @@ Dans un Spark Shell vous n'avez pas besoin de créer un objetSparkContext puisqu
 
 ### **3. Installation d'AWS CLI**
 
-Pour installer la nouvelle version d'AWS CLI (v2xx), la procédure se [trouve ici](https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html)<br>
-On peut vérifier que c'est bien installé (et où) en tapant : which aws (sous linux)<br>
+Pour installer la nouvelle version d'AWS CLI (v2xx), la procédure se [trouve ici](https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html).<br>
+On peut vérifier que c'est bien installé (et où) en tapant : which aws (sous linux).<br>
+Une fois installé, il peut être nécessaire de relancer le terminal avant de pouvoir lancer une commande aws.<br>
 Pour installer la v1xx (non recommandé) : *pip install awscli*<br>
 
 **Création d'une clef :**<br>
 Aller dans son compte AWS, en haut à droite cliquer sur son nom puis sur *Informations d'identification de sécurité*.<br>
 Sur cette page créer une clef d'accès. **Attention** : penser à la supprimer/désactiver quand elle ne sert plus.<br>
-Une fois la clef crée, la télécharger au format csv.<br>
+Une fois la clef créée, la télécharger au format csv.<br>
 
 **Configuration d'AWS CLI :**<br>
 Taper : aws configure<br>
@@ -60,4 +61,35 @@ Et entrer la clef précédemment crée (*Access key ID* et *Secret access key*).
 *Default region name* [None], pour mettre pour la France : eu-west-3<br>
 *Default output format* [None], laisser par défaut en appuyant sur entrée.<br>
 On peut aussi utiliser json comme *Default output format*, ce qui indique que vous souhaitez obtenir des réponses de l'API au format JSON.<br>
+
+### **4. Création d'un bucket sur S3**
+Nous stockerons tous nos fichiers dans un bucket S3 (logs de Spark, notebook, images à traiter et données produites par les traitements).<br>
+Pour créer le bucket : aws s3 mb s3://*Nom_Du_Bucket*<br>
+Le nom doit être unique, pas seulement sur votre compte mais parmis tous les buckets créés par tous les utilisateurs sur S3. Ce qui est logique car ces buckets peuvent être accessibles publiquement (privés par défaut).<br>
+**Upload de fichiers :**
+Pour uploader tout un dossier, par exemple celui contenant toutes les images, se déplacer dans le dossier et taper : aws s3 sync . s3://*Nom_Du_Bucket*/*Nom_Du_Dossier_De_Destination*<br>
+Si vous n'êtes pas dans le dossier à uploader, indiquez le chemin complet de ce dernier à la place du "." après *sync*.<br>
+**Autoriser l'accès public de certains fichiers :**
+Si vous souhaitez ouvrir au public l'accès à certains fichiers, sur le site d'AWS, aller dans le bucket créé, puis dans l'onglet *Autorisation*, puis désactiver *Bloquer l'accès public*. Par défaut l'accès publique de tout le contenu du bucket est désactivé, prudence quand vous désactivez ce paramètre car cela veut dire que vous pourrez alors ouvrir l'accès à certains fichiers.<br>
+Toujours dans *Autorisation*, allez dans *Stratégie de compartiment* et vous pourrez y paramétrer l'accès à certains fichiers/dossiers, au format JSON. Exemple pour partager le notebook et le fichier de sortie de notre programme :<br>
+```
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Effect": "Allow",
+            "Principal": "*",
+            "Action": "s3:GetObject",
+            "Resource": "arn:aws:s3:::*Nom_Du_Bucket*/jupyter/jovyan/02 - Traitements (AWS-EMR).ipynb"
+        },
+        {
+            "Effect": "Allow",
+            "Principal": "*",
+            "Action": "s3:GetObject",
+            "Resource": "arn:aws:s3:::*Nom_Du_Bucket*/Results/pcaFeatures.csv"
+        }
+    ]
+}
+```
+
 
