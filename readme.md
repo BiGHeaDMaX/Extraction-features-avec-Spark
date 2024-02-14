@@ -41,7 +41,7 @@ Pour un interpréteur un peu plus convivial : <br>
 - Le mettre dans la variable PYSPARK_PYTHON
 - Lancement avec la commande : *PYSPARK_PYTHON=ipython /opt/spark/bin/pyspark* ou *PYSPARK_PYTHON=ipython pyspark*
 <br>
-Dans un Spark Shell vous n'avez pas besoin de créer un objetSparkContext puisqu'il a déjà été créé. Il est disponible via la variable sc.
+Dans un Spark Shell vous n'avez pas besoin de créer un objet *SparkContext* puisqu'il a déjà été créé. Il est disponible via la variable *sc*.
 
 ### **3. Installation d'AWS CLI**
 
@@ -57,7 +57,7 @@ Une fois la clef créée, la télécharger au format csv.<br>
 
 **Configuration d'AWS CLI :**<br>
 Taper : aws configure<br>
-Et entrer la clef précédemment crée (*Access key ID* et *Secret access key*).<br>
+Et entrer la clef précédemment créée (*Access key ID* et *Secret access key*).<br>
 *Default region name* [None], pour mettre pour la France : eu-west-3<br>
 *Default output format* [None], laisser par défaut en appuyant sur entrée.<br>
 On peut aussi utiliser json comme *Default output format*, ce qui indique que vous souhaitez obtenir des réponses de l'API au format JSON.<br>
@@ -69,8 +69,7 @@ Le nom doit être unique, pas seulement sur votre compte mais parmi tous les buc
 
 **Upload de fichiers :**<br>
 Pour uploader tout un dossier, par exemple celui contenant toutes les images, se déplacer dans le dossier et taper : aws s3 sync . s3://*Nom_Du_Bucket*/*Nom_Du_Dossier_De_Destination*<br><br>
-
-Si vous n'êtes pas dans le dossier à uploader, indiquez le chemin complet de ce dernier à la place du "." après *sync*.<br><br>
+Si vous n'êtes pas dans le dossier à uploader, indiquez le chemin complet de ce dernier à la place du "." après *sync*.<br>
 
 **Autoriser l'accès public de certains fichiers :**<br>
 Si vous souhaitez ouvrir au public l'accès à certains fichiers, sur le site d'AWS, aller dans le bucket créé, puis dans l'onglet *Autorisation*, puis désactiver *Bloquer l'accès public*. Par défaut l'accès publique de tout le contenu du bucket est désactivé, prudence quand vous désactivez ce paramètre car cela veut dire que vous pourrez alors ouvrir l'accès à certains fichiers.<br><br>
