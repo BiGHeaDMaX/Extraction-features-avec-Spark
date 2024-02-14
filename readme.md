@@ -45,19 +45,19 @@ Dans un Spark Shell vous n'avez pas besoin de créer un objetSparkContext puisqu
 
 ### **3. Installation d'AWS CLI**
 
-Pour installer la nouvelle version d'AWS CLI (v2xx), la procédure se [trouve ici](https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html)
-On peut vérifier que c'est bien installé (et où) en tapant : which aws (sous linux)
-Pour installer la v1xx (non recommandé) : *pip install awscli*
+Pour installer la nouvelle version d'AWS CLI (v2xx), la procédure se [trouve ici](https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html)<br>
+On peut vérifier que c'est bien installé (et où) en tapant : which aws (sous linux)<br>
+Pour installer la v1xx (non recommandé) : *pip install awscli*<br>
 
 **Création d'une clef :**<br>
-Aller dans son compte AWS, en haut à droite cliquer sur son nom puis sur *Informations d'identification de sécurité*.
-Sur cette page créer une clef d'accès. **Attention** : penser à la supprimer/désactiver quand elle ne sert plus.
-Une fois la clef crée, la télécharger au format csv.
+Aller dans son compte AWS, en haut à droite cliquer sur son nom puis sur *Informations d'identification de sécurité*.<br>
+Sur cette page créer une clef d'accès. **Attention** : penser à la supprimer/désactiver quand elle ne sert plus.<br>
+Une fois la clef crée, la télécharger au format csv.<br>
 
 **Configuration d'AWS CLI :**<br>
-Taper : aws configure
-Et entrer la clef précédemment crée (*Access key ID* et *Secret access key*).
-*Default region name* [None], pour mettre pour la France : eu-west-3
-*Default output format* [None], laisser par défaut en appuyant sur entrée.
-On peut aussi utiliser json comme *Default output format*, ce qui indique que vous souhaitez obtenir des réponses de l'API au format JSON.
+Taper : aws configure<br>
+Et entrer la clef précédemment crée (*Access key ID* et *Secret access key*).<br>
+*Default region name* [None], pour mettre pour la France : eu-west-3<br>
+*Default output format* [None], laisser par défaut en appuyant sur entrée.<br>
+On peut aussi utiliser json comme *Default output format*, ce qui indique que vous souhaitez obtenir des réponses de l'API au format JSON.<br>
 
