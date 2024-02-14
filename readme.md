@@ -183,18 +183,15 @@ ssh -i Nom_Clef_EC2.pem hadoop@DNS_public_du_nœud_primaire<br>
 Nom_Clef_EC2.pem : il s'agit de la clef que vous avez créé dans EC2.<br>
 Bien mettre *hadoop@* avant l'adresse de votre cluster.<br>
 La commande ci-dessus implique que vous vous trouviez dans le répertoire où se trouve la clef, sinon indiquer le chemin complet.<br><br>
-
 Le fichier .pem doit avoir des droits d'accès restreints, sinon la procédure ne va pas fonctionner.<br>
 **Sur Linux :** chmod 600 Nom_Fichier.pem<br>
 Idéalement, placer le fichier.pem dans le dossier .ssh de votre dossier home.<br>
 **Sur Windows :** c'est un peu plus fastidieux. Faire clic droit sur le fichier.pem, sécurité, avancé, supprimer les droits hérités, puis ajouter les droits à un seul utilisateur (par ex celui de la session utilisée) et ajouter seulement droits en lecture et écriture (pas exécution), [détails de la procédure ici](https://www.youtube.com/watch?v=AiWMy87o320).<br><br>
-
 Remarque : quand vous créez uniquement une instance EC2 (et non un cluster EMR), pour vous connecter à cette dernière, il faudra mettre *ec2-user@Adresse_De_L'instance* et non *@hadoop".<br>
 
 **Création d'un tunnel SSH :**<br>
 Entrer dans votre terminal : ssh -i Nom_Clef_EC2.pem -D 5555 hadoop@DNS_public_du_nœud_primaire<br>
 Remarque : j'ai choisi ici le port 5555, mais on aurait pu en choisir un autre.<br><br>
-
 Ensuite, dans l'onglet Application du cluster on voit les liens des appli, dont JupyterHub.<br>
 Pour y accéder, il faut utiliser un proxy sur le navigateur, j'ai choisi ici le plugin *foxyproxy*.<br>
 Créer un accès dans foxyproxy : <br>
@@ -203,9 +200,9 @@ Créer un accès dans foxyproxy : <br>
 - Post : 5555 (ou autre si on en a choisi un autre).
 <br>
 Ensuite on peut accéder à Jupyterhub, se connecter avec les identifiants par défauts : <br>
-- login : jovyan
-- password : jupyter
-<br>
+
+- login : jovyan<br>
+- password : jupyter<br>
 Uploader son notebook, puis cliquer dessus.<br>
 Il faut bien choisir le kernel *pyspark* pour exécuter le notebook.
 
