@@ -33,7 +33,6 @@ Spark peut être très verbeux, pour réduire la verbosité :<br>
 Lancer un script, exemple : <br>
 /opt/spark/bin/spark-submit wordcount.py text.txt
 
-
 ### **2. Spark Shell**
 Pour lancer la version python : *pyspark* ou */opt/spark/bin/pyspark*<br>
 <br>
@@ -44,5 +43,21 @@ Pour un interpréteur un peu plus convivial : <br>
 <br>
 Dans un Spark Shell vous n'avez pas besoin de créer un objetSparkContext puisqu'il a déjà été créé. Il est disponible via la variable sc.
 
+### **3. Installation d'AWS CLI**
 
+Pour installer la nouvelle version d'AWS CLI (v2xx), la procédure se [trouve ici](https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html)
+On peut vérifier que c'est bien installé (et où) en tapant : which aws (sous linux)
+Pour installer la v1xx (non recommandé) : *pip install awscli*
+
+**Création d'une clef :**<br>
+Aller dans son compte AWS, en haut à droite cliquer sur son nom puis sur *Informations d'identification de sécurité*.
+Sur cette page créer une clef d'accès. **Attention** : penser à la supprimer/désactiver quand elle ne sert plus.
+Une fois la clef crée, la télécharger au format csv.
+
+**Configuration d'AWS CLI :**<br>
+Taper : aws configure
+Et entrer la clef précédemment crée (*Access key ID* et *Secret access key*).
+*Default region name* [None], pour mettre pour la France : eu-west-3
+*Default output format* [None], laisser par défaut en appuyant sur entrée.
+On peut aussi utiliser json comme *Default output format*, ce qui indique que vous souhaitez obtenir des réponses de l'API au format JSON.
 
