@@ -63,15 +63,15 @@ Et entrer la clef précédemment crée (*Access key ID* et *Secret access key*).
 On peut aussi utiliser json comme *Default output format*, ce qui indique que vous souhaitez obtenir des réponses de l'API au format JSON.<br>
 
 ### **4. Création d'un bucket sur S3**
-Nous stockerons tous nos fichiers dans un bucket S3 (logs de Spark, notebook, images à traiter et données produites par les traitements).<br>
-Pour créer le bucket : aws s3 mb s3://*Nom_Du_Bucket*<br>
-Le nom doit être unique, pas seulement sur votre compte mais parmis tous les buckets créés par tous les utilisateurs sur S3. Ce qui est logique car ces buckets peuvent être accessibles publiquement (privés par défaut).<br>
-**Upload de fichiers :**
-Pour uploader tout un dossier, par exemple celui contenant toutes les images, se déplacer dans le dossier et taper : aws s3 sync . s3://*Nom_Du_Bucket*/*Nom_Du_Dossier_De_Destination*<br>
+Nous stockerons tous nos fichiers dans un bucket S3 (logs de Spark, notebook, images à traiter et données produites par les traitements).<br><br>
+Pour créer le bucket : aws s3 mb s3://*Nom_Du_Bucket*<br><br>
+Le nom doit être unique, pas seulement sur votre compte mais parmis tous les buckets créés par tous les utilisateurs sur S3. Ce qui est logique car ces buckets peuvent être accessibles publiquement (privés par défaut).<br><br>
+**Upload de fichiers :**<br>
+Pour uploader tout un dossier, par exemple celui contenant toutes les images, se déplacer dans le dossier et taper : aws s3 sync . s3://*Nom_Du_Bucket*/*Nom_Du_Dossier_De_Destination*<br><br>
 Si vous n'êtes pas dans le dossier à uploader, indiquez le chemin complet de ce dernier à la place du "." après *sync*.<br>
-**Autoriser l'accès public de certains fichiers :**
-Si vous souhaitez ouvrir au public l'accès à certains fichiers, sur le site d'AWS, aller dans le bucket créé, puis dans l'onglet *Autorisation*, puis désactiver *Bloquer l'accès public*. Par défaut l'accès publique de tout le contenu du bucket est désactivé, prudence quand vous désactivez ce paramètre car cela veut dire que vous pourrez alors ouvrir l'accès à certains fichiers.<br>
-Toujours dans *Autorisation*, allez dans *Stratégie de compartiment* et vous pourrez y paramétrer l'accès à certains fichiers/dossiers, au format JSON. Exemple pour partager le notebook et le fichier de sortie de notre programme :<br>
+**Autoriser l'accès public de certains fichiers :**<br>
+Si vous souhaitez ouvrir au public l'accès à certains fichiers, sur le site d'AWS, aller dans le bucket créé, puis dans l'onglet *Autorisation*, puis désactiver *Bloquer l'accès public*. Par défaut l'accès publique de tout le contenu du bucket est désactivé, prudence quand vous désactivez ce paramètre car cela veut dire que vous pourrez alors ouvrir l'accès à certains fichiers.<br><br>
+Toujours dans *Autorisation*, allez dans *Stratégie de compartiment* et vous pourrez y paramétrer l'accès à certains fichiers/dossiers, au format JSON. Exemple pour partager le notebook et le fichier de sortie de notre programme :<br><br>
 ```
 {
     "Version": "2012-10-17",
@@ -80,13 +80,13 @@ Toujours dans *Autorisation*, allez dans *Stratégie de compartiment* et vous po
             "Effect": "Allow",
             "Principal": "*",
             "Action": "s3:GetObject",
-            "Resource": "arn:aws:s3:::*Nom_Du_Bucket*/jupyter/jovyan/02 - Traitements (AWS-EMR).ipynb"
+            "Resource": "arn:aws:s3:::Nom_Du_Bucket/jupyter/jovyan/02 - Traitements (AWS-EMR).ipynb"
         },
         {
             "Effect": "Allow",
             "Principal": "*",
             "Action": "s3:GetObject",
-            "Resource": "arn:aws:s3:::*Nom_Du_Bucket*/Results/pcaFeatures.csv"
+            "Resource": "arn:aws:s3:::Nom_Du_Bucket/Results/pcaFeatures.csv"
         }
     ]
 }
