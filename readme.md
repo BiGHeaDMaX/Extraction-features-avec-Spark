@@ -203,6 +203,7 @@ Ensuite on peut accéder à Jupyterhub, se connecter avec les identifiants par d
 
 - login : jovyan<br>
 - password : jupyter<br>
+
 Uploader son notebook, puis cliquer dessus.<br>
 Il faut bien choisir le kernel *pyspark* pour exécuter le notebook.
 
