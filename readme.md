@@ -112,9 +112,9 @@ Cloud privé virtuel (VPC) et Sous-réseau : choisir ceux dans lequel se trouve 
 Attention, dès que le cluster sera créé, vous allez commencer à payer, même lorsqu'aucun code n'est lancé.<br>
 Il est recommandé de choisir *Résilier automatiquement le cluster après le temps d'inactivité* et de choisir une période au bout de laquelle le cluster sera *résilié*, c'est-à-dire supprimé.<br>
 
-**Actions d'amorçage :**<br>
+**Actions d'amorçage (bootstrap) :**<br>
 Actions qui seront lancées au moment de la création de chaque instance. Nous allons créer un fichier shell .sh qui contiendra nos instructions, exemple des dépendances qui ont été installées pour ce projet : <br>
-```ssh
+```
 #!/bin/bash
 sudo python3 -m pip install -U setuptools
 sudo python3 -m pip install -U pip
@@ -127,6 +127,8 @@ sudo python3 -m pip install s3fs
 sudo python3 -m pip install fsspec
 sudo python3 -m pip install keras
 ```
+
+Remarque : j'ai ici installé une version un peu antérieure de *Pandas* (1.2.5), car il y avait un problème de compatibilité avec la version de *Numpy* installée par défaut sur les instances.<br>
 
 Stocker enuite ce fichier .sh sur notre bucket, puis cliquer sur *Ajouter* et indiquer le chemin vers le fichier .sh sur le bucket S3.<br>
 
