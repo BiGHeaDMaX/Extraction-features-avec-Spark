@@ -92,4 +92,82 @@ Toujours dans *Autorisation*, allez dans *Stratégie de compartiment* et vous po
 }
 ```
 
+### **5. Création du cluster avec AWS EMR**
+Sur le site d'AWS, aller sur EMR, puis : <br>
+- Créer un nouveau cluster
+- Donner un nom
+- Choisir la dernière version d'Amazon EMR
+- Cocher *Hadoop*, *Spark*, *Tensorflow* (si besoin de *keras*, il faudra l'installer en plus après avec un bootstrap) et *JupyterHub*. Laisser les autres qui sont cochés par défaut.
+
+**Configuration de cluster :**<br>
+- Laisser le choix par défaut *Groupe d'instances uniformes*.
+- Pour ce projet, j'ai choisi des instances (primaire et unités) de type *m5a.xlarge* (les *m5.xlarge* ne semblaient pas marcher sur la région Paris au moment de la réalisation de ce projet).
+- Retirer le groupe d'instance de tâches, pas nécessaire ici.
+- Laisser le choix par défaut *Définir manuellement la taille du cluster*. Pour ce projet, j'ai choisi 2 Unités principales (workers). Donc on aura donc 3 instances EC2 : 1 instance maître (driver) et 2 instances principales (workers).
+
+**Réseaux :**<br>
+Cloud privé virtuel (VPC) et Sous-réseau : choisir ceux dans lequel se trouve votre bucket sur S3.<br>
+
+**Résiliation du cluster :**<br>
+Attention, dès que le cluster sera créé, vous allez commencer à payer, même lorsqu'aucun code n'est lancé.<br>
+Il est recommandé de choisir *Résilier automatiquement le cluster après le temps d'inactivité* et de choisir une période au bout de laquelle le cluster sera *résilié*, c'est-à-dire supprimé.<br>
+
+**Actions d'amorçage :**<br>
+Actions qui seront lancées au moment de la création de chaque instance. Nous allons créer un fichier shell .sh qui contiendra nos instructions, exemple des dépendances qui ont été installées pour ce projet : <br>
+```ssh
+#!/bin/bash
+sudo python3 -m pip install -U setuptools
+sudo python3 -m pip install -U pip
+sudo python3 -m pip install wheel
+sudo python3 -m pip install pillow
+sudo python3 -m pip install pandas==1.2.5
+sudo python3 -m pip install pyarrow
+sudo python3 -m pip install boto3
+sudo python3 -m pip install s3fs
+sudo python3 -m pip install fsspec
+sudo python3 -m pip install keras
+```
+
+Stocker enuite ce fichier .sh sur notre bucket, puis cliquer sur *Ajouter* et indiquer le chemin vers le fichier .sh sur le bucket S3.<br>
+
+**Journaux de clusters :**<br>
+Choisir le chemin sur votre bucket S3 où vous souhaitez stocker vos logs.<br>
+En procédant ainsi, vous pourrez encore consulter l'historique de l'exécution de votre code Spark après la résiliation du cluster.<br>
+
+**Paramètres logiciels :**<br>
+On va paramétrer la persistance des notebooks créés et ouvert via JupyterHub.<br>
+Sans paramétrer ceci, les notebooks jupyterhub seraient stockés par défaut sur le disque de l'instance EC2 maître et seraient donc perdus au moment de la résiliation du cluster.<br>
+Ceci se paramètre au format JSON : <br>
+```json
+[
+  {
+    "Classification": "jupyter-s3-conf",
+    "Properties": {
+      "s3.persistence.bucket": "Nom_Du_Bucket",
+      "s3.persistence.enabled": "true"
+    }
+  }
+]
+```
+
+**Configuration de sécurité et paire de clés EC2 :**<br>
+Choisir une paire de clé Amazon EC2 (qu'il faudra préalablement créer dans EC2/Réseau et sécurité/Paires de clés puis *Créer une paire de clef*).<br>
+
+**Rôle Identity and Access Management (IAM) :**<br>
+Si des rôles avaient été créés précédemment (précédantes créations d'EMR), les choisir, sinon en créer.<br>
+
+**Création du cluster :**<br>
+Cliquez enfin sur créer un cluster. L'opération peut prendre 15/20 minutes.<br>
+Une fois le cluster créé et disponible, il sera affiché : *en attente*.<br>
+
+**Recréer un cluster :**<br>
+Même une fois résilié, votre cluster sera toujours visible dans votre liste de clusters sur EMR.<br>
+Si vous souhaitez recréer un nouveau cluster identique, cliquez sur celui de votre choix, puis cliquez sur *Cloner* en haut à droite.<br>
+Vous pouvez également cliquer sur *Cloner dans AWS CLI* pour faire la même opération dans AWS CLI.<br>
+
+
+
+
+
+
 
