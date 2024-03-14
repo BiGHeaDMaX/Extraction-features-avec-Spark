@@ -14,6 +14,9 @@ Ces traitements seront réalisés à l'aide de Spark, le but étant que ces dern
 - **02 - Traitements (AWS-EMR).ipynb** : notebook a exécuter sur le cloud avec un plus grand nombre d'images.
 - **03 - Présentation.pptx** : slides de présentation du projet.
 
+## **Article associé**
+Retrouvez l'article de présentation de ce projet [ici](https://bigheadmax.github.io/07-traitement-aws-spark.html).
+
 ## **Mise en place de l'environnement Big Data**
 
 ### **1. Installation de Spark en local pour les tests**
